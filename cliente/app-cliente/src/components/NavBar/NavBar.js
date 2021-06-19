@@ -10,10 +10,10 @@ export default function NavBar(){
     const [searchState, setSearchState] = useState([])
     const [pokeDataState, setPokeDataState] = useState([])
         
-    const handleSearch = (eve)=>{
+    const handleSearch = async (eve)=>{
         eve.preventDefault()
         
-            SearchApi (searchState)
+            await SearchApi (searchState)
             .then(pokeData =>{
                 
                 if (pokeData.HandleError != null) {
@@ -32,13 +32,20 @@ export default function NavBar(){
                     });
             }
             })
+
+            setSearchState('')
     }
     
     //toma los datos del input
     const handleChange = (eve)=>{
         const search = eve.target.value;
-        setSearchState(search)
-    }   
+        setSearchState(search.toLowerCase())
+    }
+
+    //restart app
+    const restart = ()=>{
+        window.location.reload()
+    }
 
     return <>
     <header className="header">
@@ -46,7 +53,7 @@ export default function NavBar(){
             <ul>
 
                 <div className='home'>
-                    <li>HOME</li>
+                    <li onClick={restart}>HOME</li>
                 </div>
                 <form onSubmit={handleSearch} autoComplete='off'>
                     <input type='search' name='pokeName' value={searchState} onChange={handleChange} placeholder="Busca tu Pokemon Favorito" required ={true}/>

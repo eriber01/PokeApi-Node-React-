@@ -16,8 +16,8 @@ export default function Card({data}){
                 </div>
                 <div className='dataPoke'>
                     <div className='pokedexOrder'>
-                        <strong className='order'>#{dataState.order}</strong>
-                        <strong className='type' >{dataState.type}</strong>
+                        <strong className='order'>#{dataState.order || "Order Pokedex"}</strong>
+                        <strong className='type' >{dataState.type || "Type Pokemon"}</strong>
                     </div>
                     <div className='atributos'>
                         <p>Size <br/> {dataState.size}</p>
